@@ -1,0 +1,24 @@
+﻿<Window x:Class="TestApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestApp"
+        mc:Ignorable="d"
+        Title="签到" Height="653" Width="657" WindowStartupLocation="CenterScreen">
+    <Grid Margin="97,0,0,0" HorizontalAlignment="Left" Width="560" Height="643" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="473*"/>
+            <RowDefinition Height="170*"/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush Opacity="0.75" ImageSource="/微信图片_20211202115220.jpg"/>
+        </Grid.Background>
+
+        <Label Content="今天你签到了吗？" Margin="204,264,-33,0" VerticalAlignment="Top" Height="57" Width="389" RenderTransformOrigin="0.5,0.5" FontSize="36" FontFamily="Arial Black"/>
+        <Button Name="BT" Content="开机自启" HorizontalAlignment="Left" Margin="460,42,0,0" VerticalAlignment="Top" Height="36" Width="116" Click="Button_Click"/>
+        <TextBlock Name="TBK" HorizontalAlignment="Left" Margin="434,101,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="98" Width="169"/>
+
+
+    </Grid>
+</Window>

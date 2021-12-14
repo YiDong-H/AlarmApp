@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <PackageIcon>微信图片_20211202115200.jpg</PackageIcon>
+    <PackageIconUrl />
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <StartupObject />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>output\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="微信图片_20211202115220.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="微信图片_20211202115220.jpg" />
+  </ItemGroup>
+
+</Project>
