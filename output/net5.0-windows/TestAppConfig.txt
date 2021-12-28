@@ -1,1 +1,1 @@
-AutoStart=Y
+AutoStart=N
