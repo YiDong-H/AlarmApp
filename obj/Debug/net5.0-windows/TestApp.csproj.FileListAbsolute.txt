@@ -1,4 +1,3 @@
-D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\TestApp.csproj.AssemblyReference.cache
 D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\MainWindow.g.cs
 D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\App.g.cs
 D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\TestApp_MarkupCompile.cache
@@ -20,3 +19,6 @@ D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\TestApp.dll
 D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\ref\TestApp.dll
 D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\TestApp.pdb
 D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\TestApp.genruntimeconfig.cache
+D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\TestApp.csproj.AssemblyReference.cache
+D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\StudyContent.g.cs
+D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\StudyContent.baml

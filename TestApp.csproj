@@ -4,7 +4,6 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <PackageIcon>微信图片_20211202115200.jpg</PackageIcon>
     <PackageIconUrl />
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <StartupObject />
@@ -15,11 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="微信图片_20211202115220.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="微信图片_20211202115220.jpg" />
+    <Resource Include="OnePiece.jpg" />
   </ItemGroup>
 
 </Project>

@@ -15,7 +15,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using System.IO;
-
+using System.Timers;
+using System.Windows.Threading;
+using System.ComponentModel;
 
 namespace TestApp
 {
@@ -24,19 +26,22 @@ namespace TestApp
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public static string fileName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-        public static string fsn = fileName.Substring(0, fileName.LastIndexOf('.')) + "Config.txt";
+        public static string fsn = fileName.Substring(0, fileName.LastIndexOf("\\")) + "\\Config.txt";
+        public static string studyRecord = fileName.Substring(0, fileName.LastIndexOf("\\")) + "\\StudyRecord.txt";
+        private TimeSpan ts = new TimeSpan();
+        DateTime dts = new DateTime();
+        DispatcherTimer timer = new DispatcherTimer();
+        static string content = "";
         public MainWindow()
         {
+
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             if (File.Exists(fsn))
             {
-                FileStream fs = new FileStream(fsn, FileMode.Open);
-                StreamReader sr = new StreamReader(fs);
-                string s = sr.ReadToEnd().Split("AutoStart=")[1];
-                sr.Close();
-                fs.Close();
+                string s = ReadConfig("AutoStart",0);
                 if (s.Equals("Y"))
                 {
                     BT.Content = "关闭自启";
@@ -45,6 +50,16 @@ namespace TestApp
                 {
                     BT.Content = "开机自启";
                 }
+            }
+            else if (File.Exists(fileName))
+            {
+                FileStream fs = new FileStream(fsn, FileMode.OpenOrCreate);
+                StreamWriter sw = new StreamWriter(fs);
+                sw.Write("AutoStart=N;");
+                sw.Write("StudyStart=N;");
+                sw.Flush();
+                sw.Close();
+                fs.Close();
             }
         }
 
@@ -55,11 +70,7 @@ namespace TestApp
            
             if (File.Exists(fsn))
             {
-                FileStream fs = new FileStream(fsn, FileMode.Open);
-                StreamReader sr = new StreamReader(fs);
-                string s = sr.ReadToEnd().Split("AutoStart=")[1];
-                sr.Close();
-                fs.Close();
+                string s = ReadConfig("AutoStart", 0);
                 if (s.Equals("Y"))
                 {
                     TF = false;
@@ -69,9 +80,7 @@ namespace TestApp
                 }
                 TBK.Text = WriteRegistry(fileName, TF);
 
-                fs = new FileStream(fsn, FileMode.Open);
-                sr = new StreamReader(fs);
-                s = sr.ReadToEnd().Split("AutoStart=")[1];
+                s = ReadConfig("AutoStart", 0);
                 if (s.Equals("Y"))
                 {
                     BT.Content = "关闭自启";
@@ -80,8 +89,6 @@ namespace TestApp
                 {
                     BT.Content = "开机自启";
                 }
-                sr.Close();
-                fs.Close();
                 return;
             }
             TBK.Text =  WriteRegistry(fileName,TF);
@@ -92,8 +99,6 @@ namespace TestApp
         {
             if (File.Exists(strName))
             {
-                FileStream fs = new FileStream(fsn, FileMode.OpenOrCreate);
-                StreamWriter sw = new StreamWriter(fs);
                 try
                 {
                    
@@ -104,9 +109,12 @@ namespace TestApp
                         if (reg.GetValue(strNewName) == null)
                         {
                             reg.SetValue(strNewName, strName);
-                            sw.Write("AutoStart=Y");
-                            sw.Flush();
+                            ChangeConfig("AutoStart", 10, 'Y');
 
+                        }
+                        else
+                        {
+                            ChangeConfig("AutoStart", 10, 'Y');
                         }
                         return "已自启";
                     }
@@ -115,8 +123,11 @@ namespace TestApp
                         if (reg.GetValue(strNewName) != null)
                         {
                             reg.DeleteValue(strNewName);
-                            sw.Write("AutoStart=N");
-                            sw.Flush();
+                            ChangeConfig("AutoStart", 10, 'N');
+                        }
+                        else
+                        {
+                            ChangeConfig("AutoStart", 10, 'N');
                         }
                         return "已关闭";
                     }
@@ -124,16 +135,118 @@ namespace TestApp
                 {
                     return e.StackTrace;
                 }
-                finally
-                {
-                    sw.Close();
-                    fs.Close();
-                }
             }
             else
             {
-                return "没有此文件";
+                return "此文件夹下没有找到app";
             }
+        }
+
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            string s = ReadConfig("StudyStart", 1);
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Timer_Tick;
+            if (s.Equals("N"))
+            {
+                StudyContent st = new StudyContent();
+                st.accept += delegate { content = (string)sender; };
+                //Hide();
+                st.Topmost = true;
+                st.ShowDialog();
+                if(st.DialogResult == true)
+                {
+                    Show();
+                    if (File.Exists(fsn))
+                    {
+                        ChangeConfig("StudyStart", 11, 'Y');
+                    }
+                    StudyR.Content = "Stop";
+                    dts = DateTime.Now;
+                    timer.Start();
+                }
+                else
+                {
+                    Show();
+                }
+                
+            }else if (s.Equals("Y"))
+            {
+                timer.Stop();
+                ChangeConfig("StudyStart", 11, 'N');
+                string record = string.Format("{0:00}:{1:00}:{2:00}", ts.Hours, ts.Minutes, ts.Seconds);
+                StudyR.Content = "Start";
+                timel.Content = "00:00:00";
+                if (File.Exists(fileName))
+                {
+                    FileStream fs = new FileStream(studyRecord, FileMode.Append);
+                    StreamWriter sw = new StreamWriter(fs);
+                    sw.WriteLine(DateTime.Now.ToShortDateString() + "          学习内容："+content+ "          学习时长：" + record);
+                    sw.Flush();
+                    sw.Close();
+                    fs.Close();
+                }
+                content = "";
+            }
+            
+        }
+
+
+        public void Timer_Tick(object sender, EventArgs e)
+        {
+            ts = DateTime.Now - dts;
+            timel.Content = string.Format("{0:00}:{1:00}:{2:00}", ts.Hours, ts.Minutes, ts.Seconds);
+        }
+
+
+        public static void ChangeConfig(string name,int index,char value)
+        {
+            FileStream fs = new FileStream(fsn, FileMode.Open);
+            StreamReader sr = new StreamReader(fs);
+            string s = sr.ReadToEnd();
+            sr.Close();
+            FileStream fs2 = new FileStream(fsn, FileMode.Open, FileAccess.ReadWrite);
+            StreamWriter sw = new StreamWriter(fs2);
+
+            StringBuilder sb = new StringBuilder(s);
+            try
+            {
+                sb[s.IndexOf(name+"=") + index] = value;
+                sw.Write(sb.ToString());
+                sw.Flush();
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+            finally
+            {
+                sw.Close();
+                fs.Close();
+            }
+        }
+
+        public static string ReadConfig(string name,int locate)
+        {
+            FileStream fs = new FileStream(fsn, FileMode.Open);
+            StreamReader sr = new StreamReader(fs);
+            string sc = sr.ReadToEnd().Split(';')[locate];
+            string s = sc.Split(name+"=")[1];
+            sr.Close();
+            fs.Close();
+            return s;
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            ChangeConfig("StudyStart", 11, 'N');
+            base.OnClosing(e);
+        }
+
+        public static void setContent(string value)
+        {
+            content = value;
         }
     }
 }
