@@ -19,6 +19,8 @@ D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\TestApp.dll
 D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\ref\TestApp.dll
 D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\TestApp.pdb
 D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\TestApp.genruntimeconfig.cache
-D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\TestApp.csproj.AssemblyReference.cache
 D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\StudyContent.g.cs
 D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\StudyContent.baml
+D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\Setting.g.cs
+D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\Setting.baml
+D:\vsProject\StudyTest\TestApp\obj\Debug\net5.0-windows\TestApp.csproj.AssemblyReference.cache

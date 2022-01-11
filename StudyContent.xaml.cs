@@ -19,7 +19,6 @@ namespace TestApp
     /// </summary>
     public partial class StudyContent : Window
     {
-        public event EventHandler accept;
         public StudyContent()
         {
             WindowStartupLocation = WindowStartupLocation.CenterScreen;

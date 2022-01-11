@@ -5,22 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestApp"
         mc:Ignorable="d"
-        Title="签到" Height="653" Width="563" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    <Grid HorizontalAlignment="Right" Width="557" Height="643" VerticalAlignment="Top">
-        <Grid.Background>
+        Title="非魚🐟" Height="540" Width="540" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Grid HorizontalAlignment="Right" Width="540" Height="540" VerticalAlignment="Top" >
+        <!--<Grid.Background>
             <ImageBrush ImageSource="/OnePiece.jpg" Opacity="0.5" Stretch="Fill" TileMode="None"/>
-        </Grid.Background>
+        </Grid.Background>-->
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="473*"/>
-            <RowDefinition Height="170*"/>
+            <RowDefinition Height="53*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <Image Name="BackgroundImage" Source="{Binding BkImg}" Opacity="0.5" Stretch="Fill"/>
+        <Label Margin="76,85,75,0" VerticalAlignment="Top" Height="200" RenderTransformOrigin="0.5,0.5" FontSize="36" FontFamily="Arial Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <TextBlock Name="alaText" TextWrapping="Wrap" Text="{Binding AlarmText}"/>
+        </Label>
+        <Button Name="StudyR" Content="{Binding StudyRecordStart}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="45" Width="124" Background="#FFD17E7E" BorderBrush="#FF562424" Foreground="#FF2F1C1C" BorderThickness="0,0,0,0" FontSize="18" FontFamily="Broadway" FontStyle="Italic" Click="Button_Click_1" Margin="0,367,0,0"/>
+        <Button Name="timel"  Content="00:00:00" HorizontalAlignment="Center" Margin="0,302,0,0" VerticalAlignment="Top" Height="56" Width="200" FontFamily="Arvo" FontSize="36" Padding="1,1,1,1" BorderThickness="0,0,0,2" Visibility="Visible" ClipToBounds="True"  Background="{x:Null}" BorderBrush="#FF3C3838" Foreground="Black"/>
+        <Button  Name="Set" Background="{x:Null}" HorizontalAlignment="Left" Margin="29,12,0,0" VerticalAlignment="Top" Width="20" Height="20" BorderThickness="0,0,0,0" Click="Button_Click_2">
+            <Image Source="{Binding SetImg}" Visibility="Visible"/>
+        </Button>
 
-        <Label Content="今天你签到了吗？" Margin="131,150,37,0" VerticalAlignment="Top" Height="58" Width="389" RenderTransformOrigin="0.5,0.5" FontSize="36" FontFamily="Arial Black"/>
-        <Button Name="BT" Content="开机自启" HorizontalAlignment="Left" Margin="404,42,0,0" VerticalAlignment="Top" Height="36" Width="116" Click="Button_Click"/>
-        <TextBlock Name="TBK" HorizontalAlignment="Left" Margin="377,101,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="98" Width="170"/>
-        <Button Name="StudyR" Content="Start" HorizontalAlignment="Center" Margin="0,371,0,0" VerticalAlignment="Top" Height="45" Width="123" Background="#FFD17E7E" BorderBrush="#FF562424" Foreground="#FF2F1C1C" BorderThickness="0,0,0,0" FontSize="18" FontFamily="Broadway" FontStyle="Italic" Click="Button_Click_1"/>
-        <Button Name="timel"  Content="00:00:00" HorizontalAlignment="Center" Margin="0,310,0,0" VerticalAlignment="Top" Height="56" Width="201" Background="{x:Null}" FontFamily="Arvo" FontSize="36"/>
+
 
 
     </Grid>

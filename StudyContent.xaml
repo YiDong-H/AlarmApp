@@ -10,7 +10,7 @@
     <Grid>
         <TextBox Name="StuCon" HorizontalAlignment="Left" Margin="105,25,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="本次学习内容：" HorizontalAlignment="Left" Margin="8,20,0,0" VerticalAlignment="Top"/>
-        <Button Content="确定" HorizontalAlignment="Left" Margin="31,56,0,0" VerticalAlignment="Top" Width="71" Click="Commit"/>
+        <Button Content="确定" HorizontalAlignment="Left" Margin="31,56,0,0" VerticalAlignment="Top" Width="71" Click="Commit" IsDefault="True"/>
         <Button Content="取消" HorizontalAlignment="Left" Margin="140,56,0,0" VerticalAlignment="Top" Width="71" Click="Cancel"/>
 
     </Grid>

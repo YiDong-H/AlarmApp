@@ -14,7 +14,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="设置.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="OnePiece.jpg" />
+    <Resource Include="设置.png" />
   </ItemGroup>
 
 </Project>
